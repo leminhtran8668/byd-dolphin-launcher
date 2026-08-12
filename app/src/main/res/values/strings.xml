@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dolphin Launcher</string>
+    <string name="tpms_title">Áp suất lốp</string>
+    <string name="trip_title">Hành trình</string>
+    <string name="speed">Tốc độ</string>
+    <string name="battery">Pin</string>
+    <string name="range">Quãng đường</string>
+    <string name="outside_temp">Nhiệt độ ngoài</string>
+    <string name="set_as_home">Đặt làm màn hình chính</string>
+    <string name="settings">Cài đặt</string>
+    <string name="day_night_auto">Tự động sáng/tối</string>
+    <string name="car_animation">Hoạt ảnh xe</string>
+    <string name="no_data">--</string>
+    <string name="kpa">kPa</string>
+    <string name="kmh">km/h</string>
+    <string name="percent">%</string>
+    <string name="km">km</string>
+    <string name="celsius">°C</string>
+</resources>
