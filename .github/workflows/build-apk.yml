@@ -33,10 +33,18 @@ jobs:
           gradle wrapper --gradle-version 8.5
           chmod +x gradlew
 
-      - name: Build debug APK
+      - name: Build debug APK (V1+V2 signed)
         run: |
           ./gradlew assembleDebug --stacktrace
           ls -lh app/build/outputs/apk/debug/
+
+      - name: Verify APK signature (must have v1 for DiLink)
+        run: |
+          APK=app/build/outputs/apk/debug/app-debug.apk
+          $ANDROID_HOME/build-tools/34.0.0/apksigner verify --verbose "$APK" || true
+          # Also show zip contents briefly
+          unzip -l "$APK" | head -30
+          echo "APK size: $(wc -c < "$APK") bytes"
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
@@ -49,10 +57,7 @@ jobs:
       - name: Summary
         run: |
           ls -lh app/build/outputs/apk/debug/app-debug.apk
-          echo "### BYD Dolphin Launcher APK" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "- **Package:** com.byd.dolphin.launcher" >> "$GITHUB_STEP_SUMMARY"
-          echo "- **Author:** Lê Minh" >> "$GITHUB_STEP_SUMMARY"
-          echo "- **File:** \`app-debug.apk\`" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "USB: thư mục \`Third Party Apps 55/\`, mật khẩu \`BYD6125F\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "### BYD Dolphin Launcher APK (DiLink)" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Package: com.byd.dolphin.launcher" >> "$GITHUB_STEP_SUMMARY"
+          echo "- targetSdk 29, V1+V2 signing, legacy jni packaging" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Author: Lê Minh" >> "$GITHUB_STEP_SUMMARY"

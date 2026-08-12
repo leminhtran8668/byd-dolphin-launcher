@@ -9,10 +9,15 @@ android {
 
     defaultConfig {
         applicationId = "com.byd.dolphin.launcher"
-        minSdk = 29          // DiLink 3 = Android 10
-        targetSdk = 29       // Keep ≤ 33 for BYD sideloading compatibility
-        versionCode = 3
-        versionName = "0.2.1-dilink"
+        minSdk = 29
+        targetSdk = 29
+        versionCode = 4
+        versionName = "0.2.2-dilink"
+
+        // Universal APK – arm64 for BYD QCM6125
+        ndk {
+            abiFilters += listOf("armeabi-v7a", "arm64-v8a")
+        }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -20,9 +25,23 @@ android {
         }
     }
 
+    signingConfigs {
+        getByName("debug") {
+            isV1SigningEnabled = true
+            isV2SigningEnabled = true
+            isV3SigningEnabled = false
+            isV4SigningEnabled = false
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig = signingConfigs.getByName("debug")
+            isMinifyEnabled = false
+        }
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("debug")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -51,6 +70,9 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+        jniLibs {
+            useLegacyPackaging = true
+        }
     }
 }
 
@@ -70,9 +92,6 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation("androidx.navigation:navigation-compose:2.7.7")
-
-    // Optional: for later 3D / animation
-    // implementation("io.github.sceneview:sceneview:2.0.3")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
