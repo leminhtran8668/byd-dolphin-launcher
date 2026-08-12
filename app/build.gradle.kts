@@ -11,8 +11,8 @@ android {
         applicationId = "com.byd.dolphin.launcher"
         minSdk = 29
         targetSdk = 29
-        versionCode = 4
-        versionName = "0.2.2-dilink"
+        versionCode = 5
+        versionName = "0.3.0-ui"
 
         // Universal APK – arm64 for BYD QCM6125
         ndk {
