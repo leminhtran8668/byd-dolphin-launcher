@@ -10,9 +10,9 @@ android {
     defaultConfig {
         applicationId = "com.byd.dolphin.launcher"
         minSdk = 29          // DiLink 3 = Android 10
-        targetSdk = 33       // Keep ≤ 33 for BYD sideloading compatibility
-        versionCode = 1
-        versionName = "0.1.0-alpha"
+        targetSdk = 29       // Keep ≤ 33 for BYD sideloading compatibility
+        versionCode = 3
+        versionName = "0.2.1-dilink"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

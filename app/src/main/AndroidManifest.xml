@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Basic -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <!-- Query all packages (Android 11+ style, still useful on 10) -->
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
-
-    <!-- BYD custom permissions (most are protectionLevel=normal) -->
+    <!-- BYD custom permissions -->
     <uses-permission android:name="android.permission.BYDAUTO_BODYWORK_COMMON" />
     <uses-permission android:name="android.permission.BYDAUTO_BODYWORK_GET" />
     <uses-permission android:name="android.permission.BYDAUTO_BODYWORK_SET" />
@@ -29,9 +24,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BYDDolphinLauncher"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:extractNativeLibs="true">
 
-        <!-- Main Launcher Activity -->
+        <!-- App thường: chỉ LAUNCHER (không HOME) để cài được trên DiLink -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -42,22 +38,18 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <!-- Optional: keep-alive service for vehicle data polling -->
-        <service
-            android:name=".data.VehicleDataService"
-            android:exported="false"
-            android:foregroundServiceType="dataSync" />
-
         <receiver
             android:name=".BootReceiver"
-            android:exported="true">
+            android:exported="true"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
