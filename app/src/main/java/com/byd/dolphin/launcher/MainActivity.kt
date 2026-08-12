@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier.modifier
+import androidx.compose.ui.Modifier
 import com.byd.dolphin.launcher.data.VehicleRepository
 import com.byd.dolphin.launcher.ui.AppDrawerScreen
 import com.byd.dolphin.launcher.ui.DashboardScreen
