@@ -29,8 +29,6 @@ android {
         getByName("debug") {
             isV1SigningEnabled = true
             isV2SigningEnabled = true
-            isV3SigningEnabled = false
-            isV4SigningEnabled = false
         }
     }
 
